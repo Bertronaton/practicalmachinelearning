@@ -1,0 +1,18 @@
+library(AppliedPredictiveModeling)
+library(caret)
+library(ElemStatLearn)
+pml.training <- read.csv("~/R/Machine Learning/assignment/pml-training.csv")
+summary(pml.training)
+pml.training[,160]<-factor(pml.training[,160])
+set.seed(33833)
+InTrain<-createDataPartition(y=pml.training[,160],p=.75,list=FALSE)
+training<-pml.training[InTrain,]
+testing<-pml.training[-InTrain,]
+
+pmlmod<-train(classe~.,data=training[,c(7:11,37:49,60:68,84:86,102,113:124,140,151:160)],method="rpart")
+varImp(pmlmod)
+pmlmod$finalModel
+
+predictions<-predict(pmlmod,newdata=testing)
+predictions
+confusionMatrix(predictions,testing$classe)

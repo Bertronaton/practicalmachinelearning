@@ -1,0 +1,26 @@
+Assignment write-up
+
+Preprocessing: 
+I first turned Classe into a factor to aid with the modeling.  I noticed that when the new_window variable was NO, most fields are missing.  Also, in the small dataset which we are using for validation, new_window  is NO for all records, and therefore I decided that all the missing fields are can be ignored for this project.  I believe training the model with these fields in the data would still be potentially useful for removing missing-variable bias and improving the estimates of the fields that were actually populated, however those missing fields only make up about 2% or the data, and given the resource constraints on my small laptop, I decided that modeling those variables to gain a small amount of accuracy would not be worth the effort.  I also double checked the distribution of the classe variable compared to new_window (using a simple one-way test) and determined that these missing values do not seem explain the classe variable: that is, the distribution of classe is almost identical for new_window  = NO as is it for new_window  = YES. 
+
+Another decision I had to make: when I imported the data, the first column, which corresponded to row number, was perfectly correlated with the classe variables in the training set.  I eliminated this variable since I assumed that this could not be used for prediction.  
+
+model training:
+I used the train function within the caret package to train the model.  Since the target variable is categorical with 5 levels, a decision tree or random forest seemed the most appropriate.  I attempted to use a random forest but my PC could not handle the processing requirement.  I used a decision tree, since it was much less computationally demanding.
+
+Validation:
+Before training the model, I created a training set consisting of 75% of the original modeling data and held out 25% for testing the model; this way I was able to calculate an estimate of the out of sample error rate.  I considered K-fold cross-validation, but given my resource constraints, I did not feel it was going to work, although it most likely would have resulted in a better model.  Using the confusion matrix function, I arrived at the following statistics:
+
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    A    B    C    D    E
+         A 1297  400  401  369  124
+         B   13  324   35  140  116
+         C   83  225  419  295  238
+         D    0    0    0    0    0
+         E    2    0    0    0  423
+
+Overall Statistics
+                                          
+               Accuracy : 0.5022          

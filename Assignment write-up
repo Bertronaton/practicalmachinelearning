@@ -3,8 +3,9 @@ Assignment write-up
 Note to the graders: I apologize for not creating the HTML version as recommended.  I am clearly not a GitHub expert.
 
 Summary:
-Using a desicion tree I trained a model with an expected out of sample error rate of about 50%.  I feel the model
-could have been a lot better but the limitations of my PC prevented me from using more advanced techniques.
+Using a desicion tree I trained a model with an expected out of sample error rate of about 50%.  After much 
+frustration dealing with the limitations of my PC, I submitted that model; however I was finally able to get
+a scaled down random forest model to work, which produced an out of sample error rate of about 1%.
 
 Preprocessing: 
 I first turned Classe into a factor to aid with the modeling.  I noticed that when the new_window variable was NO, 
@@ -18,33 +19,34 @@ distribution of the classe variable compared to new_window (using a simple one-w
 these missing values do not seem explain the classe variable: that is, the distribution of classe is almost 
 identical for new_window  = NO as is it for new_window  = YES. 
 
-Another decision I had to make: when I imported the data, the first column, which corresponded to row number, 
-was perfectly correlated with the classe variables in the training set.  I eliminated this variable since I 
-assumed that this could not be used for prediction.  
+I also noticed the the index column was perfectly correlated with the classe variable in the training set.  
+I eliminated this variable since I assumed that this could not be used for prediction on the validation set.
 
 Model training:
 I used the train function within the caret package to train the model.  Since the target variable is 
 categorical with 5 levels, a decision tree or random forest seemed the most appropriate.  I attempted to 
-use a random forest but my PC could not handle the processing requirements.  I used a decision tree, since 
-it was much less computationally demanding.
+use a random forest but my PC could not handle the processing requirements.  I settle on using a decision 
+tree, since it was much less computationally demanding, but it produced an expected out of sample error 
+rate of about 50%.  Eventually I learned of a few ways to make the random forest run more easily, and 
+was able to produce a model with an expected out of sample error rate of about 1%.  They key modifications
+were 1) reduce the training set size down siginificantly; this still produced a great model but with much
+less demand on my PC.  2) After enough research I discovered a few parameters to adjust within the train
+function that allowed the model to train faster.
 
 Validation:
-Before training the model, I created a training set consisting of 75% of the original modeling data and 
-held out 25% for testing the model; this way I was able to calculate an estimate of the out of sample 
-error rate.  I considered K-fold cross-validation, but given my resource constraints, I did not feel it 
-was going to work, although it most likely would have resulted in a better model.  Using the confusion 
-matrix function, I arrived at the following statistics:
+Before training the model, I created a training set consisting of 30% of the original modeling data and 
+held out 70% for testing the model.  I originally started with a 75/25 split for the training/holdout, but 
+could not run a random forest using this much data.  I set the K-fold cross-validation to 5 in the train
+ function, and ran the model.  Using the confusion matrix function, I arrived at the statistics  listed 
+ below.  The accuracy level of 99% was far more than what I achieved using a simple decision tree.
 
-Confusion Matrix and Statistics
+Accuracy : 0.9908
 
+Confustion Matrix:
           Reference
 Prediction    A    B    C    D    E
-         A 1297  400  401  369  124
-         B   13  324   35  140  116
-         C   83  225  419  295  238
-         D    0    0    0    0    0
-         E    2    0    0    0  423
-
-Overall Statistics
-                                          
-               Accuracy : 0.5022          
+         A 3899   25    0    0    0
+         B    4 2613   22    1    8
+         C    3   19 2367   18    1
+         D    0    0    6 2231   18
+         E    0    0    0    1 2497

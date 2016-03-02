@@ -4,21 +4,22 @@ library(caret)
 library(ElemStatLearn)
 setwd("H:/R")
 
-#Read in data
+#Read data/Remove Fields
 #this elimates the variables I chose not to use (see write-up)
 pml.training <- read.csv("~/R/pml-training.csv")[,c(7:11,37:49,60:68,84:86,102,113:124,140,151:160)]
 summary(pml.training)
 
-#turning the classe variable into a factor
+#Convert classe to factor
 pml.training[,54]<-factor(pml.training[,54])
+
 set.seed(33833)
 
-#partitioning into test/train data
+#partitioning into test/train
 InTrain<-createDataPartition(y=pml.training[,54],p=.30,list=FALSE)
 training<-pml.training[InTrain,]
 testing<-pml.training[-InTrain,]
 
-#create Random Forest Model
+#Random Forest Model
 rfmod<-train(classe~.,data=training,method="rf",trControl=trainControl(method="cv",number=5),prox=TRUE,allowParallel=TRUE)
 predictions<-predict(rfmod,newdata=testing)
 

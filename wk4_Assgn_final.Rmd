@@ -15,11 +15,16 @@ set.seed(33833)
 
 #partitioning into test/train
 InTrain<-createDataPartition(y=pml.training[,54],p=.30,list=FALSE)
+
 training<-pml.training[InTrain,]
+
 testing<-pml.training[-InTrain,]
 
 #Random Forest Model
-rfmod<-train(classe~.,data=training,method="rf",trControl=trainControl(method="cv",number=5),prox=TRUE,allowParallel=TRUE)
+rfmod<-train(classe~.,data=training,method="rf",
+  trControl=trainControl(method="cv",number=5),
+  prox=TRUE,allowParallel=TRUE)
+  
 predictions<-predict(rfmod,newdata=testing)
 
 #test predictions

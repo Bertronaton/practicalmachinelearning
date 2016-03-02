@@ -1,13 +1,13 @@
-Assignment write-up
+#Assignment write-up
 
 Note to the graders: I apologize for not creating the HTML version as recommended.  I am clearly not a GitHub expert.
 
-Summary:
+#Summary:
 Using a desicion tree I trained a model with an expected out of sample error rate of about 50%.  After much 
 frustration dealing with the limitations of my PC, I submitted that model; however I was finally able to get
 a scaled down random forest model to work, which produced an out of sample error rate of about 1%.
 
-Preprocessing: 
+#Preprocessing: 
 I first turned Classe into a factor to aid with the modeling.  I noticed that when the new_window variable was NO, 
 most fields are missing.  Also, in the small dataset which we are using for validation, new_window  is NO for all 
 records, and therefore I decided that all the missing fields are can be ignored for this project.  I believe 
@@ -22,7 +22,7 @@ identical for new_window  = NO as is it for new_window  = YES.
 I also noticed the the index column was perfectly correlated with the classe variable in the training set.  
 I eliminated this variable since I assumed that this could not be used for prediction on the validation set.
 
-Model training:
+#Model training:
 I used the train function within the caret package to train the model.  Since the target variable is 
 categorical with 5 levels, a decision tree or random forest seemed the most appropriate.  I attempted to 
 use a random forest but my PC could not handle the processing requirements.  I settle on using a decision 
@@ -33,7 +33,7 @@ were 1) reduce the training set size down siginificantly; this still produced a 
 less demand on my PC.  2) After enough research I discovered a few parameters to adjust within the train
 function that allowed the model to train faster.
 
-Validation:
+#Validation:
 Before training the model, I created a training set consisting of 30% of the original modeling data and 
 held out 70% for testing the model.  I originally started with a 75/25 split for the training/holdout, but 
 could not run a random forest using this much data.  I set the K-fold cross-validation to 5 in the train

@@ -1,2 +1,2 @@
-# practicalmachinelearning
-This repo contains my submissions for the Coursera Machine Learning assignment in week 4.  You should find my code and write-up within this repo (as separate Rmd files), and a more readable version of the R code (as a .R file)
+# Read this first:
+This repo contains my code and a separate write-up file for the week 4 assignment.  Please Read both in order to grade this assignment.

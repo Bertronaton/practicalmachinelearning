@@ -3,10 +3,10 @@
 Note to the graders: I apologize for not creating the HTML version as recommended.  I am clearly not a GitHub expert.
 
 #Summary:
- Used desicion tree and random forest models to train.  
- Out of sample error rates were 50% and 1% respectively.
- Trained on 30% of the data, and tested on the remaining 70%.
- Please read full write up for more detail.
+ 	Used desicion tree and random forest models to train.  
+ 	Out of sample error rates were 50% and 1% respectively.
+ 	Trained on 30% of the data, and tested on the remaining 70%.
+ 	Please read full write up for more detail.
 
 #Preprocessing: 
 I first turned Classe into a factor to aid with the modeling.  I noticed that when the new_window variable was NO, 
@@ -38,16 +38,6 @@ function that allowed the model to train faster.
 Before training the model, I created a training set consisting of 30% of the original modeling data and 
 held out 70% for testing the model.  I originally started with a 75/25 split for the training/holdout, but 
 could not run a random forest using this much data.  I set the K-fold cross-validation to 5 in the train
- function, and ran the model.  Using the confusion matrix function, I arrived at the statistics  listed 
- below.  The accuracy level of 99% was far more than what I achieved using a simple decision tree.
-
-Accuracy : 0.9908
-
-Confustion Matrix:
-          Reference
-Prediction    A    B    C    D    E
-         A 3899   25    0    0    0
-         B    4 2613   22    1    8
-         C    3   19 2367   18    1
-         D    0    0    6 2231   18
-         E    0    0    0    1 2497
+ function, and ran the model.  Using the confusion matrix function, I calculated the accuracy level to be
+ 99% (which is an OOS error rate = 1%). This was far more than what I achieved using a simple decision tree.
+ The accuracy was enough to earn 100% correct on the validation set, so I saw no need to test more models.

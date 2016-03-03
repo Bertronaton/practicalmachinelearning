@@ -3,10 +3,10 @@
 Note to the graders: I apologize for not creating the HTML version as recommended.  I am clearly not a GitHub expert.
 
 #Summary:
-Used desicion tree and random forest models to train.  
-Out of sample error rates were 50% and 1% respectively.
-Trained on 30% of the data, and tested on the remaining 70%.
-Please read full write up for more detail.
+ Used desicion tree and random forest models to train.  
+ Out of sample error rates were 50% and 1% respectively.
+ Trained on 30% of the data, and tested on the remaining 70%.
+ Please read full write up for more detail.
 
 #Preprocessing: 
 I first turned Classe into a factor to aid with the modeling.  I noticed that when the new_window variable was NO, 

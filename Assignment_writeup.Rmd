@@ -3,9 +3,10 @@
 Note to the graders: I apologize for not creating the HTML version as recommended.  I am clearly not a GitHub expert.
 
 #Summary:
-Using a desicion tree I trained a model with an expected out of sample error rate of about 50%.  After much 
-frustration dealing with the limitations of my PC, I submitted that model; however I was finally able to get
-a scaled down random forest model to work, which produced an out of sample error rate of about 1%.
+Used desicion tree and random forest models to train.  
+Out of sample error rates were 50% and 1% respectively.
+Trained on 30% of the data, and tested on the remaining 70%.
+Please read full write up for more detail.
 
 #Preprocessing: 
 I first turned Classe into a factor to aid with the modeling.  I noticed that when the new_window variable was NO, 
